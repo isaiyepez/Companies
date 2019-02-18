@@ -64,6 +64,7 @@
 			children = (
 				3DCCE25C2219EB86003892BE /* AppDelegate.swift */,
 				3DCCE25E2219EB86003892BE /* CompaniesController.swift */,
+				3DA64126221A5DCB00BC5406 /* CreateCompanyController.swift */,
 				3DCCE2602219EB86003892BE /* Main.storyboard */,
 				3DCCE2662219EB87003892BE /* Assets.xcassets */,
 				3DCCE2682219EB87003892BE /* LaunchScreen.storyboard */,
@@ -71,7 +72,6 @@
 				3DCCE2632219EB86003892BE /* Companies.xcdatamodeld */,
 				3DA64122221A36DB00BC5406 /* UIColor+theme.swift */,
 				3DA64124221A584400BC5406 /* Company.swift */,
-				3DA64126221A5DCB00BC5406 /* CreateCompanyController.swift */,
 			);
 			path = Companies;
 			sourceTree = "<group>";
