@@ -16,6 +16,7 @@
 		3DCCE2652219EB86003892BE /* Companies.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3DCCE2632219EB86003892BE /* Companies.xcdatamodeld */; };
 		3DCCE2672219EB87003892BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DCCE2662219EB87003892BE /* Assets.xcassets */; };
 		3DCCE26A2219EB87003892BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DCCE2682219EB87003892BE /* LaunchScreen.storyboard */; };
+		3DFE3342221BA3C200262AC7 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFE3341221BA3C200262AC7 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		3DCCE2662219EB87003892BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3DCCE2692219EB87003892BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3DCCE26B2219EB87003892BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DFE3341221BA3C200262AC7 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				3DCCE2632219EB86003892BE /* Companies.xcdatamodeld */,
 				3DA64122221A36DB00BC5406 /* UIColor+theme.swift */,
 				3DA64124221A584400BC5406 /* Company.swift */,
+				3DFE3341221BA3C200262AC7 /* CoreDataManager.swift */,
 			);
 			path = Companies;
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 				3DCCE25F2219EB86003892BE /* CompaniesController.swift in Sources */,
 				3DA64125221A584400BC5406 /* Company.swift in Sources */,
 				3DCCE25D2219EB86003892BE /* AppDelegate.swift in Sources */,
+				3DFE3342221BA3C200262AC7 /* CoreDataManager.swift in Sources */,
 				3DA64127221A5DCB00BC5406 /* CreateCompanyController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

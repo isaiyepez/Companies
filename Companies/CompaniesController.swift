@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 
 class CompaniesController: UITableViewController, CreateCompanyControllerDelegate {
+    
     func didAddCompany(company: Company) {
         //1 - modify your array
         companies.append(company)
@@ -36,24 +37,54 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
 //        
 //    }
 
-    private func fetchCompanies() {
-        let persistentContainer = NSPersistentContainer(name: "Companies")
-        persistentContainer.loadPersistentStores { (storeDescription, error) in
-            if let err = error {
-                fatalError("Loading of store failed: \(err)")
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (_, indexPath) in
+            
+            let company = self.companies[indexPath.row]
+            
+            self.companies.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            let context = CoreDataManager.shared.persistentContainer.viewContext
+            context.delete(company)
+            
+            do {
+                try context.save()
+            } catch let saveError {
+                print("Error deleting: \(saveError)")
             }
+            
         }
         
-        let context = persistentContainer.viewContext
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (_, indexPath) in
+            let company = self.companies[indexPath.row]
+        }
+        return [deleteAction, editAction]
+    }
+    
+    private func fetchCompanies() {
+//        let persistentContainer = NSPersistentContainer(name: "Companies")
+//        persistentContainer.loadPersistentStores { (storeDescription, error) in
+//            if let err = error {
+//                fatalError("Loading of store failed: \(err)")
+//            }
+//        }
+//
+//        let context = persistentContainer.viewContext
+        
+        let context = CoreDataManager.shared.persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
         
         do {
             let companies = try context.fetch(fetchRequest)
             
-            companies.forEach { (company) in
-                print(company.name ?? "Empty")
-            }
+//            companies.forEach { (company) in
+//                print(company.name ?? "Empty")
+//            }
+            self.companies = companies
+            self.tableView.reloadData()
+            
         } catch let fetchError {
             print("Error fetching: \(fetchError)")
         }

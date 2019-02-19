@@ -77,14 +77,14 @@ class CreateCompanyController: UIViewController {
     @objc func handleSave() {
         //Initialization of our Core Data Stack
         
-        let persistentContainer = NSPersistentContainer(name: "Companies")
-        persistentContainer.loadPersistentStores { (storeDescription, error) in
-            if let err = error {
-                fatalError("Loading of store failed: \(err)")
-            }
-        }
+//        let persistentContainer = NSPersistentContainer(name: "Companies")
+//        persistentContainer.loadPersistentStores { (storeDescription, error) in
+//            if let err = error {
+//                fatalError("Loading of store failed: \(err)")
+//            }
+//        }
         
-        let context = persistentContainer.viewContext
+        let context = CoreDataManager.shared.persistentContainer.viewContext
         
         let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context)
         company.setValue(nameTextField.text, forKey: "name")
@@ -92,6 +92,12 @@ class CreateCompanyController: UIViewController {
         
         do {
             try context.save()
+            
+            //sucess
+            dismiss(animated: true) {
+                self.delegate?.didAddCompany(company: company as! Company)
+            }
+            
         } catch let saveError {
             print("Error trying to save: \(saveError)")
         }
