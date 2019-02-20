@@ -11,6 +11,13 @@ import CoreData
 
 class CompaniesController: UITableViewController, CreateCompanyControllerDelegate {
     
+    func didEditCompany(company: Company) {
+        let row = companies.index(of: company)
+        
+        let reloadIndexPath = IndexPath(row: row!, section: 0)
+        tableView.reloadRows(at: [reloadIndexPath], with: .middle)
+    }
+    
     func didAddCompany(company: Company) {
         //1 - modify your array
         companies.append(company)
@@ -20,22 +27,6 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
     }
     
     var companies = [Company]()
-//    var companies = [
-//        Company(name: "Apple", founded: Date()),
-//        Company(name: "Facebook", founded: Date()),
-//        Company(name: "Microsoft", founded: Date()),
-//        Company(name: "Google", founded: Date())
-//    ]
-    
-//    func addCompany(company: Company) {
-//        
-//        //1 - modify your array
-//        companies.append(company)
-//        //2 - insert a new index path into tableView
-//        let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
-//        tableView.insertRows(at: [newIndexPath], with: .automatic)
-//        
-//    }
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (_, indexPath) in
@@ -55,22 +46,22 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
             }
             
         }
+        deleteAction.backgroundColor = UIColor.lightRed
         
-        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (_, indexPath) in
-            let company = self.companies[indexPath.row]
-        }
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit", handler: editHandlerFunction)
+        editAction.backgroundColor = UIColor.darkBlue
         return [deleteAction, editAction]
+    }
+
+    private func editHandlerFunction(action: UITableViewRowAction, indexPath: IndexPath) {
+        let editCompanyController = CreateCompanyController()
+        editCompanyController.delegate = self
+        editCompanyController.company = companies[indexPath.row]
+        let navController = CustomNavigationController(rootViewController: editCompanyController)
+        present(navController, animated: true, completion: nil)
     }
     
     private func fetchCompanies() {
-//        let persistentContainer = NSPersistentContainer(name: "Companies")
-//        persistentContainer.loadPersistentStores { (storeDescription, error) in
-//            if let err = error {
-//                fatalError("Loading of store failed: \(err)")
-//            }
-//        }
-//
-//        let context = persistentContainer.viewContext
         
         let context = CoreDataManager.shared.persistentContainer.viewContext
         
